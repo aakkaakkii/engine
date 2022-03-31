@@ -4,9 +4,8 @@ import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 import scenes.Scene;
-import scenes.TestScene;
-import scenes.TestScene2;
-import test.TestUi;
+import scenes.TextureScene;
+import scenes.TransformationScreen;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
@@ -26,8 +25,8 @@ public class Window {
     private static Scene currentScene;
 
     private Window() {
-        this.width = 1920;
-        this.height = 1080;
+        this.width = 1280;
+        this.height = 720;
         this.title = "Engine";
 
         r = 1f;
@@ -52,7 +51,7 @@ public class Window {
 
         //create the window
 
-        glfwWindow = glfwCreateWindow(width, height, title, NULL, NULL);
+        glfwWindow = glfwCreateWindow(this.width, this.height, title, NULL, NULL);
 
         if (glfwWindow == NULL) {
             throw new IllegalStateException("Filed to create the GLFW window");
@@ -88,7 +87,6 @@ public class Window {
         float endTime ;
         float dt = -1.0f;
 
-        TestUi testUi = new TestUi();
 
         while (!glfwWindowShouldClose(glfwWindow)) {
             glClearColor(r, g, b, a);
@@ -97,7 +95,7 @@ public class Window {
             if(dt >= 0) {
                 currentScene.update(dt);
             }
-            testUi.update();
+
 
             glfwSwapBuffers(glfwWindow);
 
@@ -127,8 +125,8 @@ public class Window {
 
     public static void changeScene(int newScene) {
 //        currentScene = new TestScene();
-        currentScene = new TestScene2();
-
+//        currentScene = new TransformationScreen();
+        currentScene = new TextureScene();
         currentScene.init();
     }
 

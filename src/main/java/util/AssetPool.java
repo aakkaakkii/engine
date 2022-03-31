@@ -10,6 +10,7 @@ import java.util.Map;
 public class AssetPool {
     private static Map<String, Shader> shaders = new HashMap<>();
     private static Map<String, Texture> textures = new HashMap<>();
+//    private static Map<String, Spritesheet> spriteSheets = new HashMap<>();
 
     public static Shader getShader(String resourceName) {
         File file = new File(resourceName);

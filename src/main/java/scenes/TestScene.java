@@ -12,13 +12,13 @@ import static org.lwjgl.opengl.GL30.*;
 
 public class TestScene extends Scene {
     Shader shader;
-    private float[] vertexArray = {
-            0.5f, -0.5f, 0.0f,      1.0f, 0.0f, 0.0f, 1.0f,
-            -0.5f, 0.5f, 0.0f,      1.0f, 0.0f, 0.0f, 1.0f,
-            0.5f, 0.5f, 0.0f,      1.0f, 0.0f, 0.0f, 1.0f,
-            -0.5f, -0.5f, 0.0f,      1.0f, 0.0f, 0.0f, 1.0f,
-    };
 
+    private float[] vertices = {
+            100.5f, -0.5f, 0.0f,      1.0f, 1.0f, 1.0f, 1.0f,
+            -0.5f, 100.5f, 0.0f,      0.0f, 0.0f, 0.0f, 1.0f,
+            100.5f, 100.5f, 0.0f,      1.0f, 0.0f, 0.0f, 1.0f,
+            -0.5f, -0.5f, 0.0f,      1.0f, 1.0f, 0.0f, 1.0f,
+    };
     private int[] elementArray = {
             2, 1 , 0,
             0, 1 , 3,
@@ -37,8 +37,8 @@ public class TestScene extends Scene {
         vaoId = glGenVertexArrays();
         glBindVertexArray(vaoId);
 
-        FloatBuffer vertexBuffer = BufferUtils.createFloatBuffer(vertexArray.length);
-        vertexBuffer.put(vertexArray).flip();
+        FloatBuffer vertexBuffer = BufferUtils.createFloatBuffer(vertices.length);
+        vertexBuffer.put(vertices).flip();
 
         vboId = glGenBuffers();
         glBindBuffer(GL_ARRAY_BUFFER, vboId);

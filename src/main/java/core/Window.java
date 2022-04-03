@@ -3,6 +3,7 @@ package core;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
+import renderer.FrameBuffer;
 import scenes.Scene;
 import scenes.TextureScene;
 import scenes.TransformationScreen;
@@ -15,6 +16,7 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 public class Window {
     private static Window window = new Window();
     private long glfwWindow;
+    private FrameBuffer frameBuffer;
 
     private int width;
     private int height;
@@ -25,8 +27,8 @@ public class Window {
     private static Scene currentScene;
 
     private Window() {
-        this.width = 1280;
-        this.height = 720;
+        this.width = 1920;
+        this.height = 1080;
         this.title = "Engine";
 
         r = 1f;
@@ -79,6 +81,8 @@ public class Window {
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
+        this.frameBuffer = new FrameBuffer(this.width, this.height);
+
         Window.changeScene(0);
     }
 
@@ -89,20 +93,22 @@ public class Window {
 
 
         while (!glfwWindowShouldClose(glfwWindow)) {
+
+
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
+//            this.frameBuffer.bind();
             if(dt >= 0) {
                 currentScene.update(dt);
             }
-
+//            this.frameBuffer.unbind();
 
             glfwSwapBuffers(glfwWindow);
 
             glfwPollEvents();
 
-            endTime = (float) glfwGetTime();
-
+            endTime = (float)glfwGetTime();
             dt = endTime - beginTime;
             beginTime = endTime;
         }
@@ -128,6 +134,7 @@ public class Window {
 //        currentScene = new TransformationScreen();
         currentScene = new TextureScene();
         currentScene.init();
+        currentScene.start();
     }
 
     public static Scene getScene() {

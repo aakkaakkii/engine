@@ -1,6 +1,7 @@
-package renderer;
+package components;
 
 import org.joml.Vector2f;
+import renderer.Texture;
 
 public class Sprite {
     private float width, height;
@@ -55,4 +56,7 @@ public class Sprite {
     }
 
 
+    public void setTexture(Texture texture) {
+        this.texture = texture;
+    }
 }

@@ -15,19 +15,20 @@ public class TransformationScreen extends Scene {
     @Override
     public void init() {
         camera = new Camera(new Vector2f());
-        renderBatch = new RenderBatch(1, 1, null);
+//        renderBatch = new RenderBatch(1, 1, null);
         renderBatch.start();
     }
 
 
     @Override
     public void update(float dt) {
-        renderBatch.render();
-        float[] pos = renderBatch.getVertecies();
+//        renderBatch.render();
+        float[] pos ={};
+//        float[] pos = renderBatch.getVertecies();
 
         transform(pos);
 
-        renderBatch.setVertecies(pos);
+//        renderBatch.setVertecies(pos);
 
     }
 
@@ -161,7 +162,6 @@ public class TransformationScreen extends Scene {
         }
 
         if (KeyListener.isKeyPressed(GLFW_KEY_P)) {
-            System.out.println("position");
             for (int i = 0; i < transform.length; i++) {
                 System.out.println(transform[i].x + " " + transform[i].y);
             }
